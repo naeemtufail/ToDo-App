@@ -1,0 +1,35 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="row mt-4">
+    <div class="col"><h2>Add Item</h2>
+        <form class="form-inline" method="post" action="/add_todo">
+            {% csrf_token %}
+        <input type="text" class="form-control" name="text" id="inlineFormInputName" placeholder="Type here....">
+        <button type="submit" class="btn btn-primary">Submit</button>
+            <h4 class="col ml-20">Developed By Naeem Tufail</h4>
+        </form>
+
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col">
+        <ul class="list-group">
+            {% for todo_item in todo_items %}
+            <li class="list-group-item ">{{todo_item.text}}
+                <div class="float-right">
+
+                <form method="post" action="/delete_todo/{{todo_item.id}}/">
+                    {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                </div>
+            </li>
+            {% endfor %}
+
+</ul>
+    </div>
+</div>
+
+{% endblock content %}
